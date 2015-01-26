@@ -1,0 +1,25 @@
+{
+  "name": "exl",
+  "version": "0.0.1",
+  "authors": [
+    "chihsuan <chihsuan.huang.7@gmail.com>"
+  ],
+  "description": "preview json in table",
+  "keywords": [
+    "json"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "angular": "1.2.26",
+    "angular-route": "1.2.26",
+    "angular-nvd3": "^0.0.9"
+  }
+}
