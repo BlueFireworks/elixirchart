@@ -45,6 +45,52 @@ and in html again you can use it like:
 </body>
 ```
 
+
+## Example
+
+Here is a sample json 
+
+```
+[
+    {
+        "name":"Darron Weissnat IV",
+        "BMI":20.72,
+        "age":39,
+        "birthday":"2005-01-03T00:00:00.000Z",
+        "city":"East Russel",
+        "married":false,
+        "index":0
+    }
+,
+    {
+        "name":"Pablo Ondricka",
+        "BMI":19.32,
+        "age":38,
+        "birthday":"1974-05-13T00:00:00.000Z",
+        "city":"Lake Edytheville",
+        "married":false,
+        "index":1
+    }
+,
+    {
+        "name":"Mr. Stella Kiehn Jr.",
+        "BMI":16.8,
+        "age":34,
+        "birthday":"2003-07-25T00:00:00.000Z",
+        "city":"Lake Veronicaburgh",
+        "married":false,
+        "index":2
+    }
+,
+    ...
+    ...
+    ...
+]
+```
+will convert into charts like
+
+[DEMO](http://elixirdoc.github.io/elixirchart/)
+
 ## License
 
 MIT
