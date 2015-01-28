@@ -1,12 +1,13 @@
 {
-  "name": "exl",
+  "name": "elixirchart",
   "version": "0.0.1",
   "authors": [
     "chihsuan <chihsuan.huang.7@gmail.com>"
   ],
-  "description": "preview json in table",
+  "description": "designed to making the charts with json data easily",
   "keywords": [
-    "json"
+    "json",
+    "charts"
   ],
   "license": "MIT",
   "ignore": [
