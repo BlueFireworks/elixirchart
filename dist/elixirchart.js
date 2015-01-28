@@ -12,7 +12,7 @@
         scatterChart: { path: '/scatterChart', title: 'Scatter Chart', plunker: 'http://plnkr.co/edit/6hjwSA?p=preview' },
         lineWithFocusChart: { path: '/lineWithFocusChart', title: 'Line with Focus Chart', plunker: 'http://plnkr.co/edit/sWONMb?p=preview' },
         //linePlusBarChart: { path: '/linePlusBarChart', title: 'Line + Bar Chart', plunker: 'http://plnkr.co/edit/UASCUL?p=preview' },
-        scatterPlusLineChart: { path: '/scatterPlusLineChart', title: 'Scatter + Line Chart', plunker: 'http://plnkr.co/edit/2MjNgj?p=preview' },
+        //scatterPlusLineChart: { path: '/scatterPlusLineChart', title: 'Scatter + Line Chart', plunker: 'http://plnkr.co/edit/2MjNgj?p=preview' },
         //linePlusBarWithFocusChart: { path: '/linePlusBarWithFocusChart', title: 'Line + Bar with Focus Chart', plunker: 'http://plnkr.co/edit/f0QET0?p=preview' },
         donutChart: { path: '/donutChart', title: 'Donut Chart', plunker: 'http://plnkr.co/edit/jOoJik?p=preview' },
         //bulletChart: { path: '/bulletChart', title: 'Bullet Chart', plunker: 'http://plnkr.co/edit/Mb1cWN?p=preview' },
@@ -74,7 +74,6 @@ module.export = angular.module('mainApp.controllers')
         }
       }
 
-
     
       $scope.options = {
         chart: {
@@ -87,28 +86,16 @@ module.export = angular.module('mainApp.controllers')
                 left: 65
             },
             x: function(d){ return d[0]; },
-            y: function(d){ return d[1]/100; },
+            y: function(d){ return d[1]; },
             average: function(d) { return d.mean/100; },
-
-            color: d3.scale.category10().range(),
-            transitionDuration: 300,
             useInteractiveGuideline: true,
-            clipVoronoi: false,
-
             xAxis: {
                 axisLabel: 'X Axis',
-                tickFormat: function(d) {
-                    return d3.time.format('%m/%d/%y')(new Date(d))
-                },
-                showMaxMin: false,
-                staggerLabels: true
+                showMaxMin: false
             },
 
             yAxis: {
                 axisLabel: 'Y Axis',
-                tickFormat: function(d){
-                    return d3.format(',.1%')(d);
-                },
                 axisLabelDistance: 20
             }
         }
@@ -155,9 +142,7 @@ module.export = angular.module('mainApp.controllers')
             x: function(d){return d.label;},
             y: function(d){return d.value;},
             showValues: true,
-            valueFormat: function(d){
-                return d3.format(',.4f')(d);
-            },
+            valueFormat: function(d){return d;},
             transitionDuration: 500,
             xAxis: {
                 axisLabel: 'X Axis'
@@ -180,10 +165,12 @@ module.export = angular.module('mainApp.controllers')
   
   function donutChartCtrl($scope, chartDataService){
 
-    $scope.selectX = false;
+    $scope.selectX = true;
     $scope.selectY = true;
     $scope.updateY = chartDataService.updateY;
+    $scope.updateX = chartDataService.updateX;
     chartDataService.yField = 'y';
+    chartDataService.xField = 'key';
     chartDataService.scope = $scope;
     chartDataService.updateField = updateMethod;
     
@@ -191,8 +178,7 @@ module.export = angular.module('mainApp.controllers')
  
     function updateMethod(data, field) {
       for(var i = 0; i < data.length; ++i) {
-        $scope.chartData[i]['y'] = data[i];
-        $scope.chartData[i]['key'] = 'pie' + i;
+        $scope.chartData[i][field] = data[i];
       }
     }
 
@@ -204,7 +190,6 @@ module.export = angular.module('mainApp.controllers')
             x: function(d){return d.key;},
             y: function(d){return d.y;},
             showLabels: true,
-
             pie: {
                 startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
                 endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
@@ -265,7 +250,7 @@ module.export = angular.module('mainApp.controllers')
               y: function(d){return d[1];},
               showValues: true,
               valueFormat: function(d){
-                  return d3.format(',.1f')(d);
+                  return d;
               },
               transitionDuration: 500,
               xAxis: {
@@ -331,23 +316,11 @@ module.export = angular.module('mainApp.controllers')
               x: function(d){ return d.x; },
               y: function(d){ return d.y; },
               useInteractiveGuideline: true,
-              dispatch: {
-                  stateChange: function(e){ console.log("stateChange"); },
-                  changeState: function(e){ console.log("changeState"); },
-                  tooltipShow: function(e){ console.log("tooltipShow"); },
-                  tooltipHide: function(e){ console.log("tooltipHide"); }
-              },
               xAxis: {
-                  axisLabel: 'Time (ms)'
+                  axisLabel: 'xAxis'
               },
               yAxis: {
-                  axisLabel: 'Voltage (v)',
-                  tickFormat: function(d){
-                      return d3.format('.02f')(d);
-                  },
-                  axisLabelDistance: 30
-              },
-              callback: function(chart){
+                  axisLabel: 'yAxis'
               }
           },
           title: {
@@ -356,7 +329,7 @@ module.export = angular.module('mainApp.controllers')
           },
           subtitle: {
               enable: true,
-              text: 'Subtitle for simple line chart. Lorem ipsum dolor sit amet, at eam blandit sadipscing, vim adhuc sanctus disputando ex, cu usu affert alienum urbanitas.',
+              text: 'Subtitle for simple line chart.',
               css: {
                   'text-align': 'center',
                   'margin': '10px 13px 0px 7px'
@@ -364,11 +337,7 @@ module.export = angular.module('mainApp.controllers')
           },
           caption: {
               enable: true,
-              html: '',
-              css: {
-                  'text-align': 'justify',
-                  'margin': '10px 13px 0px 7px'
-              }
+              html: ''
           }
       }; 
     }
@@ -552,24 +521,24 @@ module.export = angular.module('mainApp.controllers')
               xAxis: {
                   axisLabel: 'X Axis',
                   tickFormat: function(d){
-                      return d3.format(',f')(d);
+                      return d;
                   }
               },
               x2Axis: {
                   tickFormat: function(d){
-                      return d3.format(',f')(d);
+                      return d;
                   }
               },
               yAxis: {
                   axisLabel: 'Y Axis',
                   tickFormat: function(d){
-                      return d3.format(',.2f')(d);
+                      return d;
                   },
                   rotateYLabel: false
               },
               y2Axis: {
                   tickFormat: function(d){
-                      return d3.format(',.2f')(d);
+                      return d;
                   }
               }
 
@@ -4917,9 +4886,11 @@ module.export = angular.module('mainApp.controllers')
   
   function pieChartCtrl($scope, chartDataService){
 
-    $scope.selectX = false;
+    $scope.selectX = true;
     $scope.selectY = true;
     $scope.updateY = chartDataService.updateY;
+    $scope.updateX = chartDataService.updateX;
+    chartDataService.xField = 'key';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
     chartDataService.updateField = updateMethod;
@@ -4928,8 +4899,7 @@ module.export = angular.module('mainApp.controllers')
  
     function updateMethod(data, field) {
       for(var i = 0; i < data.length; ++i) {
-        $scope.chartData[i]['y'] = data[i];
-        $scope.chartData[i]['key'] = 'pie' + i;
+        $scope.chartData[i][field] = data[i];
       }
     }
 
@@ -4975,13 +4945,23 @@ module.export = angular.module('mainApp.controllers')
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
     chartDataService.updateField = updateMethod;
-    
-    $scope.chartData = [{"key": "", "values": chartDataService.initValues({
-                        x: null, 
-                        y: null, 
-                        size: Math.random(), 
-                        shapes: shapes[Math.random() % 6]}) 
-                      }];
+    $scope.chartData = [{"key": "", "values": initValues()}];
+
+    function initValues() {
+      console.log(11);
+      var arr = [];
+      var len = $scope.data.length;
+      for (var i = 0; i < len; i++) {
+          arr.push({
+            x: null,
+            y: null,
+            size: Math.random(),
+            shape: shapes[i % 6]
+          });
+      }
+      console.log(arr);
+      return arr;
+    }
 
     function updateMethod(data, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -4992,7 +4972,6 @@ module.export = angular.module('mainApp.controllers')
         chart: {
             type: 'scatterChart',
             height: 450,
-            color: d3.scale.category10().range(),
             scatter: {
                 onlyCircles: false
             },
@@ -5004,15 +4983,11 @@ module.export = angular.module('mainApp.controllers')
             transitionDuration: 350,
             xAxis: {
                 axisLabel: 'X Axis',
-                tickFormat: function(d){
-                    return d3.format('.02f')(d);
-                }
+                tickFormat: function(d){return d;}
             },
             yAxis: {
                 axisLabel: 'Y Axis',
-                tickFormat: function(d){
-                    return d3.format('.02f')(d);
-                },
+                tickFormat: function(d){return d;},
                 axisLabelDistance: 30
             }
         }
@@ -5404,7 +5379,9 @@ require("./controllers/chart_controllers/stackedAreaChart");
     function updateY(dataY) {
       var getKey = _.property(dataY);
       var yseleted = _.map(vm.scope.data, getKey);
-      vm.updateField(yseleted, vm.yField);
+      if(!isNaN(yseleted[0])) {
+        vm.updateField(yseleted, vm.yField);
+      }
     }
 
     function initValues(value) {
