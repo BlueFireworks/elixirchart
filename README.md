@@ -2,6 +2,14 @@
 
 Elixirchart is modified from [angular-nvd3's](https://github.com/Elixirdoc/angular-nvd3) gh-pages and designed to making the charts with json data easily.
 
+## Install
+
+Install via bower
+
+```shell
+bower install elixirchart
+```
+
 ## Usage
 
 get js from `./dist/elixirchart.js`
