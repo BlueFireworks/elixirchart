@@ -91,6 +91,10 @@ will convert into charts like
 
 [DEMO](http://elixirdoc.github.io/elixirchart/)
 
+## Deploy
+
+ ```git subtree push --prefix sample origin gh-pages```
+
 ## License
 
 MIT
