@@ -4946,7 +4946,6 @@ module.export = angular.module('mainApp.controllers')
     $scope.chartData = [{"key": "", "values": initValues()}];
 
     function initValues() {
-      console.log(11);
       var arr = [];
       var len = $scope.data.length;
       for (var i = 0; i < len; i++) {
