@@ -6,8 +6,7 @@ gulp.task('scripts', function() {
     gulp.src(['lib/elixirchart.js'])
         .pipe(browserify({
         }))
-        .pipe(gulp.dest('./dist/'))
-        .pipe(gulp.dest('./sample/js/'));
+        .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('watch', function () {

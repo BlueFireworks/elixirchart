@@ -20,12 +20,12 @@
             </div>
             </div><div class="span spanJT">
             <span ng-show="selectX">X
-              <select ng-model="dataX" ng-options="key for key in keys" ng-change="updateX(dataX)"></span>
+              <select ng-model="dataX" ng-options="key for key in xyKeys" ng-change="updateX(dataX)"></span>
                <option value="">-- select --</option>  
              </select>
             </span>
             <span ng-show="selectY">Y
-            <select ng-model="dataY" ng-options="key for key in keys" ng-change="updateY(dataY)">
+            <select ng-model="dataY" ng-options="key for key in xyKeys" ng-change="updateY(dataY)">
               <option value="">-- select --</option>  a
             </select>
             </span>

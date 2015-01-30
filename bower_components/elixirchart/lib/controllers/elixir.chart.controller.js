@@ -26,23 +26,13 @@
       else if(item.constructor == String) {
         // it is a file or API
         dataService.getData(item).then(function(response){
-          storeData(response.data);
+          scope.data = response.data;
+          scope.keys = Object.keys(scope.data[0]);
         });
       }
       else {
-        storeData(item);
-      }
-  	}
-
-  	function storeData(data) {
-      scope.data = data;
-      scope.keys = Object.keys(scope.data[0]);
-      scope.xyKeys = [];
-      for(i in scope.keys) {
-        var key = scope.keys[i];
-        if (!isNaN(data[0][key])) {
-          scope.xyKeys.push(key);
-        }
+        scope.data = item;
+        scope.keys = Object.keys(scope.data[0]);
       }
   	}
 
