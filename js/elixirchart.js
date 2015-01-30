@@ -56,20 +56,20 @@ module.export = angular.module('mainApp.controllers')
   
   function cumulativeLineChartCtrl($scope, chartDataService){
 
-      $scope.selectX = true;
-      $scope.selectY = true;
-      $scope.updateX = chartDataService.updateX;
-      $scope.updateY = chartDataService.updateY;
+      $scope.showX = true;
+      $scope.showY = true;
+      $scope.updateField = chartDataService.updateField;
       chartDataService.xField = 0;
       chartDataService.yField = 1;
       chartDataService.scope = $scope;
-      chartDataService.updateField = updateMethod;
+      chartDataService.update = update;
       
       $scope.chartData = [{"bar": true, "key": "", 
         "values": chartDataService.initValues([null, null])}];
    
-      function updateMethod(data, field) {
+      function update(data, field) {
         for(var i = 0; i < data.length; ++i) {
+        	console.log(111);
           $scope.chartData[0].values[i][field] = data[i];
         }
       }
@@ -112,20 +112,21 @@ module.export = angular.module('mainApp.controllers')
 
   function discreteBarChartCtrl($scope, chartDataService){
    
-    $scope.selectX = false;
-    $scope.selectY = true;
-    $scope.updateY = chartDataService.updateY;
-    chartDataService.yField = 'value';
+    $scope.showX = false;
+    $scope.showY = true;
+    $scope.showLabel = true;
+    $scope.updateField = chartDataService.updateField;
     chartDataService.scope = $scope;
-    chartDataService.updateField = updateMethod;
+    chartDataService.yField = 'value';
+    chartDataService.labelField = 'label';
+    chartDataService.update = update;
     
     $scope.chartData = [{"key": "", 
       "values": chartDataService.initValues({'value': null, 'label': null}) }];
  
-    function updateMethod(data, field) {
+    function update(data, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[0].values[i][field] = data[i];
-        $scope.chartData[0].values[i]['label'] = i;
       }
     }
 
@@ -165,18 +166,18 @@ module.export = angular.module('mainApp.controllers')
   
   function donutChartCtrl($scope, chartDataService){
 
-    $scope.selectX = true;
-    $scope.selectY = true;
-    $scope.updateY = chartDataService.updateY;
-    $scope.updateX = chartDataService.updateX;
+    $scope.showX = false;
+    $scope.showY = true;
+    $scope.showLabel = true;
+    $scope.updateField = chartDataService.updateField;
     chartDataService.yField = 'y';
-    chartDataService.xField = 'key';
+    chartDataService.labelField = 'key';
     chartDataService.scope = $scope;
-    chartDataService.updateField = updateMethod;
+    chartDataService.update = update;
     
     $scope.chartData = chartDataService.initValues({'key': 'pie', 'y': 1});
  
-    function updateMethod(data, field) {
+    function update(data, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[i][field] = data[i];
       }
@@ -218,19 +219,18 @@ module.export = angular.module('mainApp.controllers')
   
     function historicalBarChartCtrl($scope, chartDataService){
 
-      $scope.selectX = true;
-      $scope.selectY = true;
-      $scope.updateX = chartDataService.updateX;
-      $scope.updateY = chartDataService.updateY;
+      $scope.showX = true;
+      $scope.showY = true;
+      $scope.updateField = chartDataService.updateField;
       chartDataService.xField = 0;
       chartDataService.yField = 1;
       chartDataService.scope = $scope;
-      chartDataService.updateField = updateMethod;
+      chartDataService.update = update;
       
       $scope.chartData = [{"bar": true, "key": "", 
         "values": chartDataService.initValues([null, null])}];
    
-      function updateMethod(data, field) {
+      function update(data, field) {
         for(var i = 0; i < data.length; ++i) {
           $scope.chartData[0].values[i][field] = data[i];
         }
@@ -285,19 +285,18 @@ module.export = angular.module('mainApp.controllers')
         
     function lineChartCtrl($scope, chartDataService) {
       
-      $scope.selectX = true;
-      $scope.selectY = true;
-      $scope.updateX = chartDataService.updateX;
-      $scope.updateY = chartDataService.updateY;
+      $scope.showX = true;
+      $scope.showY = true;
+      $scope.updateField = chartDataService.updateField;
       chartDataService.xField = 'x';
       chartDataService.yField = 'y';
       chartDataService.scope = $scope;
-      chartDataService.updateField = updateMethod;
+      chartDataService.update = update;
       
-      $scope.chartData = [{"key": "", 
+      $scope.chartData = [{"key": "lineChart", 
         "values": chartDataService.initValues({'x': null, 'y': null}) }];
    
-      function updateMethod(data, field) {
+      function update(data, field) {
         for(var i = 0; i < data.length; ++i) {
           $scope.chartData[0].values[i][field] = data[i];
         }
@@ -489,19 +488,18 @@ module.export = angular.module('mainApp.controllers')
   
     function lineWithFocusChartCtrl($scope, chartDataService){
       
-      $scope.selectX = true;
-      $scope.selectY = true;
-      $scope.updateX = chartDataService.updateX;
-      $scope.updateY = chartDataService.updateY;
+      $scope.showX = true;
+      $scope.showY = true;
+      $scope.updateField = chartDataService.updateField;
       chartDataService.xField = 'x';
       chartDataService.yField = 'y';
       chartDataService.scope = $scope;
-      chartDataService.updateField = updateMethod;
+      chartDataService.update = update;
       
       $scope.chartData = [{"key": "steam", 
         "values": chartDataService.initValues({'x': null, 'y': null}) }];
    
-      function updateMethod(data, field) {
+      function update(data, field) {
         for(var i = 0; i < data.length; ++i) {
           $scope.chartData[0].values[i][field] = data[i];
         }
@@ -645,20 +643,21 @@ module.export = angular.module('mainApp.controllers')
   
   function multiBarHorizontalChartCtrl($scope, chartDataService){
     
-    $scope.selectX = false;
-    $scope.selectY = true;
-    $scope.updateY = chartDataService.updateY;
+    $scope.showX = false;
+    $scope.showY = true;
+    $scope.showLabel = true;
+    $scope.updateField = chartDataService.updateField;
     chartDataService.yField = 'value';
+    chartDataService.labelField = 'label';
     chartDataService.scope = $scope;
-    chartDataService.updateField = updateMethod;
+    chartDataService.update = update;
     
     $scope.chartData = [{"key": "", "color": "#d62728",
       "values": chartDataService.initValues({'value': null, 'label': null}) }];
  
-    function updateMethod(data, field) {
+    function update(data, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[0].values[i][field] = data[i];
-        $scope.chartData[0].values[i]['label'] = i;
       }
     }
 
@@ -4886,18 +4885,18 @@ module.export = angular.module('mainApp.controllers')
   
   function pieChartCtrl($scope, chartDataService){
 
-    $scope.selectX = true;
-    $scope.selectY = true;
-    $scope.updateY = chartDataService.updateY;
-    $scope.updateX = chartDataService.updateX;
-    chartDataService.xField = 'key';
+    $scope.showX = false;
+    $scope.showY = true;
+    $scope.showLabel = true;
+    $scope.updateField = chartDataService.updateField;
+    chartDataService.labelField = 'key';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
-    chartDataService.updateField = updateMethod;
+    chartDataService.update = update;
     
     $scope.chartData = chartDataService.initValues({'key': 'pie', 'y': 1});
  
-    function updateMethod(data, field) {
+    function update(data, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[i][field] = data[i];
       }
@@ -4937,14 +4936,13 @@ module.export = angular.module('mainApp.controllers')
   function scatterChartCtrl($scope, chartDataService){
     var shapes = ['circle', 'cross', 'triangle-up', 'triangle-down', 'diamond', 'square'];
     
-    $scope.selectX = true;
-    $scope.selectY = true;
-    $scope.updateX = chartDataService.updateX;
-    $scope.updateY = chartDataService.updateY;
+    $scope.showX = true;
+    $scope.showY = true;
+    $scope.updateField = chartDataService.updateField;
     chartDataService.xField = 'x';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
-    chartDataService.updateField = updateMethod;
+    chartDataService.update = update;
     $scope.chartData = [{"key": "", "values": initValues()}];
 
     function initValues() {
@@ -4963,7 +4961,7 @@ module.export = angular.module('mainApp.controllers')
       return arr;
     }
 
-    function updateMethod(data, field) {
+    function update(data, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[0].values[i][field] = data[i];
       }
@@ -5376,21 +5374,21 @@ require("./controllers/chart_controllers/stackedAreaChart");
   function chartDataService() {
     
     var vm = this;
-    vm.updateX = updateX;
-    vm.updateY = updateY;
+    vm.updateField = updateField;
     vm.initValues = initValues;
 
-    function updateX(dataX) {
-      var getKey = _.property(dataX);
-      var xseleted = _.map(vm.scope.data, getKey);
-      vm.updateField(xseleted, vm.xField);
-    }
-
-    function updateY(dataY) {
-      var getKey = _.property(dataY);
-      var yseleted = _.map(vm.scope.data, getKey);
-      if(!isNaN(yseleted[0])) {
-        vm.updateField(yseleted, vm.yField);
+    function updateField(key, field) {
+      var getKey = _.property(key);
+      var seleted = _.map(vm.scope.data, getKey);
+      
+      if(field === 'x') {
+        vm.update(seleted, vm.xField);
+      }
+      else if(field === 'y') {
+        vm.update(seleted, vm.yField);
+      }
+      else if (field === 'label') {
+        vm.update(seleted, vm.labelField);
       }
     }
 
