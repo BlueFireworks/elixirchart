@@ -20,25 +20,32 @@
             </div>
             </div><div class="span spanJT">
 
-            <span ng-show="showX">X
+            <div class="col_select" ng-show="showX"><label>x Field</label>
               <select ng-model="dataX" ng-options="key for key in xyKeys" ng-change="updateField(dataX, 'x')"></span>
                <option value="">-- select --</option>  
              </select>
-           </span>
+           </div>
 
-            <span ng-show="showY">Y
+           <div class="col_select" ng-show="showY"><label>y Field</label>
             <select ng-model="dataY" ng-options="key for key in xyKeys" ng-change="updateField(dataY, 'y')">
-              <option value="">-- select --</option>  a
+              <option value="">-- select --</option>  
             </select>
-          </span>
+          </div>
+        
+          <div class="col_select" ng-show="showY"><label>y2 Field</label>
+            <select ng-model="dataY2" ng-options="key for key in xyKeys" ng-change="updateField(dataY2, 'y')">
+              <option value="">-- select --</option>  
+            </select>
+          </div>
 
-          <div ng-show="showLabel">Label
+
+          <div class="col_select" ng-show="showLabel"><label>label Field</label>
             <select ng-model="label" ng-options="key for key in keys" ng-change="updateField(label, 'label')">
               <option value="">-- select --</option>
             </select>
           </div>
 
-
+          <label>Advanced options</label>
             <json-tree json="options" edit-level="low" collapsed-level="3"></json-tree>
         </div>
     </div>
