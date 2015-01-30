@@ -19,6 +19,14 @@
                 <nvd3 data="chartData" options="options" events="events" api="api" config="{extended: params.mode === 'extended', visible: params.visible, disabled: params.disabled, autorefresh: params.autorefresh }"></nvd3>
             </div>
             </div><div class="span spanJT">
+            
+            
+          <div class="col_select" ng-show="showLabel"><label>label Field</label>
+            <select ng-model="label" ng-options="key for key in keys" ng-change="updateField(label, 'label')">
+              <option value="">-- select --</option>
+            </select>
+          </div>
+
 
             <div class="col_select" ng-show="showX"><label>x Field</label>
               <select ng-model="dataX" ng-options="key for key in xyKeys" ng-change="updateField(dataX, 'x')"></span>
@@ -32,16 +40,9 @@
             </select>
           </div>
         
-          <div class="col_select" ng-show="showY"><label>y2 Field</label>
-            <select ng-model="dataY2" ng-options="key for key in xyKeys" ng-change="updateField(dataY2, 'y')">
+          <div class="col_select" ng-show="showY2"><label>y2 Field</label>
+            <select ng-model="dataY2" ng-options="key for key in xyKeys" ng-change="updateField(dataY2, 'y2')">
               <option value="">-- select --</option>  
-            </select>
-          </div>
-
-
-          <div class="col_select" ng-show="showLabel"><label>label Field</label>
-            <select ng-model="label" ng-options="key for key in keys" ng-change="updateField(label, 'label')">
-              <option value="">-- select --</option>
             </select>
           </div>
 
