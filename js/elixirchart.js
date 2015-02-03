@@ -60,6 +60,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 0;
     chartDataService.yField = 1;
     chartDataService.scope = $scope;
@@ -132,6 +133,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY2 = false;
     $scope.showLabel = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.scope = $scope;
     chartDataService.yField = 'value';
     chartDataService.labelField = 'label';
@@ -190,6 +192,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY2 = false;
     $scope.showLabel = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.yField = 'y';
     chartDataService.labelField = 'key';
     chartDataService.scope = $scope;
@@ -246,6 +249,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = false;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 0;
     chartDataService.yField = 1;
     chartDataService.scope = $scope;
@@ -317,10 +321,12 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 'x';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
     chartDataService.update = update;
+
 
     $scope.chartData = [
     {
@@ -384,6 +390,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 0;
     chartDataService.yField = 1;
     chartDataService.scope = $scope;
@@ -457,6 +464,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 0;
     chartDataService.yField = 1;
     chartDataService.scope = $scope;
@@ -554,6 +562,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 'x';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
@@ -637,6 +646,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 'x';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
@@ -714,6 +724,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY2 = true;
     $scope.showLabel = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.yField = 'value';
     chartDataService.labelField = 'label';
     chartDataService.scope = $scope;
@@ -4969,6 +4980,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY2 = false;
     $scope.showLabel = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.labelField = 'key';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
@@ -5022,6 +5034,8 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
+    
     chartDataService.xField = 'x';
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
@@ -5223,6 +5237,7 @@ module.export = angular.module('mainApp.controllers')
     $scope.showY = true;
     $scope.showY2 = true;
     $scope.updateField = chartDataService.updateField;
+    $scope.toogleOptions = chartDataService.toogleOptions;
     chartDataService.xField = 0;
     chartDataService.yField = 1;
     chartDataService.scope = $scope;
@@ -5467,6 +5482,7 @@ require("./controllers/chart_controllers/stackedAreaChart");
     vm.updateField = updateField;
     vm.initValues = initValues;
     vm.loadParams = loadParams;
+    vm.toogleOptions = toogleOptions;
     vm.scope = null;
 
     function updateField(key, field) {
@@ -5523,6 +5539,11 @@ require("./controllers/chart_controllers/stackedAreaChart");
         updateField(urlObject.label, 'label');
         vm.scope.label = urlObject.label;
       }
+    }
+
+    function toogleOptions() {
+      console.log(111);
+      vm.scope.showOptions = !vm.scope.showOptions;
     }
 
     return this;

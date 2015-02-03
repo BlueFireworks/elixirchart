@@ -46,8 +46,10 @@
             </select>
           </div>
 
-          <label>Advanced options</label>
-            <json-tree json="options" edit-level="low" collapsed-level="3"></json-tree>
+          <div class="col_select">
+            <button class="btn btn-primary" ng-click="toogleOptions()">Advanced options</button>
+            <json-tree ng-show="showOptions" json="options" edit-level="low" collapsed-level="3"></json-tree>
+          </div>
         </div>
     </div>
 </div>
