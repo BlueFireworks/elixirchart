@@ -68,13 +68,16 @@ module.export = angular.module('mainApp.controllers')
     $scope.chartData = [
     {
       "key": "y1",  color: '#2ca02c',
-      "values": chartDataService.initValues([null, null])
+      "values": chartDataService.initValues([0, 0])
     },
     {
       "key": "y2",  color: '#ff7f0e',
-      "values": chartDataService.initValues([null, null])
+      "values": chartDataService.initValues([0, 0])
     }
     ];
+
+    
+    chartDataService.loadParams();
     
     
     function update(data, index, field) {
@@ -135,7 +138,10 @@ module.export = angular.module('mainApp.controllers')
     chartDataService.update = update;
     
     $scope.chartData = [{"key": "y1", 
-    "values": chartDataService.initValues({'value': null, 'label': null}) }];
+    "values": chartDataService.initValues({'value': 0, 'label': 0}) }];
+
+    
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -190,6 +196,9 @@ module.export = angular.module('mainApp.controllers')
     chartDataService.update = update;
     
     $scope.chartData = chartDataService.initValues({'key': 'label', 'y': 1});
+
+    
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -244,6 +253,10 @@ module.export = angular.module('mainApp.controllers')
     
     $scope.chartData = [{"bar": true, "key": "", 
     "values": chartDataService.initValues([null, null])}];
+
+
+    chartDataService.loadParams();
+    
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -298,7 +311,7 @@ module.export = angular.module('mainApp.controllers')
   module.export = angular.module('mainApp.controllers')
   .controller('lineChartCtrl', lineChartCtrl);
   
-  function lineChartCtrl($scope, chartDataService) {
+  function lineChartCtrl($scope, $location, chartDataService) {
     
     $scope.showX = true;
     $scope.showY = true;
@@ -308,17 +321,19 @@ module.export = angular.module('mainApp.controllers')
     chartDataService.yField = 'y';
     chartDataService.scope = $scope;
     chartDataService.update = update;
-    
+
     $scope.chartData = [
     {
       "key": "y1",  color: '#2ca02c',
-      "values": chartDataService.initValues({'x': null, 'y': null}) 
+      "values": chartDataService.initValues({'x': 0, 'y': 0}) 
     },
     {
       "key": "y2",  color: '#ff7f0e',
-      "values": chartDataService.initValues({'x': null, 'y': null}) 
+      "values": chartDataService.initValues({'x': 0, 'y': 0}) 
     }
     ];
+
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -378,6 +393,10 @@ module.export = angular.module('mainApp.controllers')
     {"key": "y1", "bar": true,"values": chartDataService.initValues([null, null])},
     {"key": "y2", color: '#ff7f0e', "values": chartDataService.initValues([null, null])},
     ];
+    
+
+    chartDataService.loadParams();
+
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -450,6 +469,9 @@ module.export = angular.module('mainApp.controllers')
       series.values = series.values.map(function(d) { return {x: d[0], y: d[1] } });
       return series;
     });
+
+    
+    chartDataService.loadParams();
 
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -545,6 +567,9 @@ module.export = angular.module('mainApp.controllers')
       "key": "y2", color: '#ff7f0e', "values": chartDataService.initValues({'x': null, 'y': null})
     }
     ];
+
+    
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -628,6 +653,10 @@ module.export = angular.module('mainApp.controllers')
     }
     ];
 
+
+    chartDataService.loadParams();
+    
+
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
         if(field === 'x'){
@@ -679,7 +708,7 @@ module.export = angular.module('mainApp.controllers')
   .controller('multiBarHorizontalChartCtrl', multiBarHorizontalChartCtrl);
   
   function multiBarHorizontalChartCtrl($scope, chartDataService){
-    
+
     $scope.showX = false;
     $scope.showY = true;
     $scope.showY2 = true;
@@ -692,24 +721,27 @@ module.export = angular.module('mainApp.controllers')
     
     $scope.chartData = [
     {
-        "key": "y1", "values": chartDataService.initValues({'value': null, 'label': null}) 
+      "key": "y1", "values": chartDataService.initValues({'value': null, 'label': null}) 
     },
     {
-        "key": "y2", "color": "#d62728", "values": chartDataService.initValues({'value': null, 'label': null}) 
+      "key": "y2", "color": "#d62728", "values": chartDataService.initValues({'value': null, 'label': null}) 
     }
     ];
+
+    
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
         if(field === 'label'){
-            $scope.chartData[1].values[i][field] = data[i];
+          $scope.chartData[1].values[i][field] = data[i];
         }
         $scope.chartData[index].values[i][field] = data[i];
+      }
     }
-}
 
-$scope.options = {
-    chart: {
+    $scope.options = {
+      chart: {
         type: 'multiBarHorizontalChart',
         height: 700,
         x: function(d){return d.label;},
@@ -718,17 +750,17 @@ $scope.options = {
         showValues: true,
         transitionDuration: 500,
         xAxis: {
-            showMaxMin: false
+          showMaxMin: false
         },
         yAxis: {
-            axisLabel: 'Values',
-            tickFormat: function(d){
-                return d3.format(',.2f')(d);
-            }
+          axisLabel: 'Values',
+          tickFormat: function(d){
+            return d3.format(',.2f')(d);
+          }
         }
-    }
-};
-}
+      }
+    };
+  }
 })();
 
 },{}],13:[function(require,module,exports){
@@ -4944,6 +4976,8 @@ module.export = angular.module('mainApp.controllers')
     
     $scope.chartData = chartDataService.initValues({'key': 'label', 'y': 1});
     
+    chartDataService.loadParams();
+    
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
         $scope.chartData[i][field] = data[i];
@@ -5001,18 +5035,20 @@ module.export = angular.module('mainApp.controllers')
     },
     ];
 
+    
+    chartDataService.loadParams();
+
     function initValues() {
       var arr = [];
       var len = $scope.data.length;
       for (var i = 0; i < len; i++) {
         arr.push({
-          x: null,
-          y: null,
+          x: 0,
+          y: 0,
           size: Math.random(),
           shape: shapes[i % 6]
         });
       }
-      console.log(arr);
       return arr;
     }
 
@@ -5196,6 +5232,8 @@ module.export = angular.module('mainApp.controllers')
     {"key": "y1", "values": chartDataService.initValues([null, null])},
     {"key": "y2", "values": chartDataService.initValues([null, null])},
     ];
+    
+    chartDataService.loadParams();
     
     function update(data, index, field) {
       for(var i = 0; i < data.length; ++i) {
@@ -5423,11 +5461,13 @@ require("./controllers/chart_controllers/stackedAreaChart");
   module.exports = angular.module('elixirchart')
                    .factory('chartDataService', chartDataService);
   
-  function chartDataService() {
+  function chartDataService($location) {
     
     var vm = this;
     vm.updateField = updateField;
     vm.initValues = initValues;
+    vm.loadParams = loadParams;
+    vm.scope = null;
 
     function updateField(key, field) {
       var getKey = _.property(key);
@@ -5435,15 +5475,19 @@ require("./controllers/chart_controllers/stackedAreaChart");
       
       if(field === 'x') {
         vm.update(seleted, 0, vm.xField);
+        $location.search('x', key);
       }
       else if(field === 'y') {
         vm.update(seleted, 0, vm.yField);
+        $location.search('y', key);
       }
       else if (field === 'y2') {
         vm.update(seleted, 1, vm.yField);
+        $location.search('y2', key);
       } 
       else if (field === 'label') {
         vm.update(seleted, 0, vm.labelField);
+        $location.search('label', key);
       }
     }
 
@@ -5460,7 +5504,29 @@ require("./controllers/chart_controllers/stackedAreaChart");
       }
       return arr;
     }
+
+    function loadParams() {
+      var urlObject = $location.search();
+      if(urlObject.x) {
+        updateField(urlObject.x, 'x');
+        vm.scope.dataX = urlObject.x;
+      }
+      if(urlObject.y) {
+        updateField(urlObject.y, 'y');
+        vm.scope.dataY = urlObject.y;
+      }
+      if(urlObject.y2) {
+        updateField(urlObject.y2, 'y2');
+        vm.scope.dataY2 = urlObject.y2;
+      }
+      if(urlObject.label) {
+        updateField(urlObject.label, 'label');
+        vm.scope.label = urlObject.label;
+      }
+    }
+
     return this;
+
   }
 
 })();
