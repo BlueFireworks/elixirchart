@@ -5397,14 +5397,13 @@ module.export = angular.module('mainApp.controllers')
   elixirchartController.$inject = ['$scope', '$rootScope', '$location', 'dataService'];
 
   function config($routeProvider, CHARTS) {
-    $routeProvider.when('/', {templateUrl: 'pages/home.html', controller: 'mainCtrl'});
+    $routeProvider.when('/charts', {templateUrl: 'pages/home.html', controller: 'mainCtrl'});
 
     angular.forEach(CHARTS, function(value, key) {
       $routeProvider.when(value.path, 
         {templateUrl: 'pages/charts.html', controller: key + 'Ctrl'});
     });
 
-    $routeProvider.otherwise({redirectTo: '/'});
   }
 
   function initialize($rootScope, $route, $location, CHARTS) {
