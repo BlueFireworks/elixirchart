@@ -101,7 +101,9 @@ will convert into charts like
 
 ## Deploy
 
- ```git subtree push --prefix sample origin gh-pages```
+ ```
+ git subtree push --prefix sample origin gh-pages
+ ```
 
 ## License
 
