@@ -5296,6 +5296,7 @@ module.export = angular.module('mainApp.controllers')
 (function(){
   
   module.exports = elixirChartController;
+  var _ = require('lodash');
 
   function elixirChartController(scope, rootscope, location, 
       dataService) {
@@ -5355,7 +5356,7 @@ module.export = angular.module('mainApp.controllers')
 })();
 
 
-},{}],21:[function(require,module,exports){
+},{"lodash":25}],21:[function(require,module,exports){
 (function(){
   'use strict';
   module.export = angular.module('elixirchart')

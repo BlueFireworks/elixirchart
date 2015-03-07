@@ -3,6 +3,7 @@
             ng-model="params.selectedChart"
             ng-options="value.title for (key, value) in params.charts"
             ng-change="utils.selectChart(params.selectedChart)">
+              <option value="">-- select chart --</option>
     </select>
     <div id="mode">
         <label><input type="checkbox" ng-model="params.autorefresh"> Autorefresh</label>&nbsp;
