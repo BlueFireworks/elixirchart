@@ -5305,6 +5305,7 @@ module.export = angular.module('mainApp.controllers')
     vm.config = config;
     vm.getData = getData;
   	scope.isActive = isActive;
+    scope.$watch('data', function() {storeData(scope.data);}, true);
   	
   	vm.config();
 
